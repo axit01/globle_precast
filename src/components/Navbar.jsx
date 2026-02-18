@@ -47,9 +47,7 @@ const Navbar = () => {
     ];
 
     // Dynamic classes based on scroll and page
-    const navBackgroundClass = (isHome && !isScrolled)
-        ? 'bg-transparent border-transparent'
-        : 'bg-white/90 backdrop-blur-md border-slate-200 shadow-sm';
+    const navBackgroundClass = 'bg-white/10 backdrop-blur-md border-b border-white/10 shadow-sm transition-all duration-300';
 
     const textColorClass = (isHome && !isScrolled)
         ? 'text-white hover:text-orange-400'
