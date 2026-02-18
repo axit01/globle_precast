@@ -47,15 +47,12 @@ const Navbar = () => {
     ];
 
     // Dynamic classes based on scroll and page
+    // Dynamic classes based on scroll and page
     const navBackgroundClass = 'bg-white/10 backdrop-blur-md border-b border-white/10 shadow-sm transition-all duration-300';
 
-    const textColorClass = (isHome && !isScrolled)
-        ? 'text-white hover:text-orange-400'
-        : 'text-slate-600 hover:text-orange-600';
+    const textColorClass = 'text-orange-600 hover:text-orange-700';
 
-    const mobileButtonClass = (isHome && !isScrolled)
-        ? 'text-white hover:bg-white/20'
-        : 'text-slate-600 hover:bg-slate-100';
+    const mobileButtonClass = 'text-orange-600 hover:bg-orange-50';
 
     return (
         <nav className={`fixed w-full z-50 border-b transition-all duration-300 ${navBackgroundClass}`}>
