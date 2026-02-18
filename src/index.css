@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #FF6B00;
+  /* Industrial Orange */
+  --color-brand-secondary: #001F3F;
+  /* Deep Navy */
+  --color-brand-slate: #64748B;
+  /* Slate Grey */
+  --color-brand-charcoal: #333333;
+  /* Charcoal */
+  --font-display: "Outfit", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* Custom Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #F8FAFC;
+  /* Light background for clean look */
+  color: var(--color-brand-charcoal);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
