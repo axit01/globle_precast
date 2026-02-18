@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -47,18 +48,12 @@ const Hero = () => {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className="flex flex-col sm:flex-row gap-4 justify-center"
                 >
-                    <a
-                        href="/catalog"
+                    <Link
+                        to="/contact"
                         className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-md font-medium transition-all shadow-lg hover:shadow-orange-500/25"
                     >
-                        {t('hero.viewCollection')}
-                    </a>
-                    <a
-                        href="/contact"
-                        className="px-8 py-4 bg-transparent border border-white/20 hover:bg-white/10 text-white rounded-md font-medium transition-all backdrop-blur-sm"
-                    >
                         {t('hero.contactUs')}
-                    </a>
+                    </Link>
                 </motion.div>
             </div>
 
