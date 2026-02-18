@@ -3,6 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
+import heroImage from '../assets/1image.png';
+
 const Hero = () => {
     const { t } = useLanguage();
 
@@ -13,7 +15,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/50 z-10" />
                 {/* High-quality architectural image from assets */}
                 <img
-                    src="/src/assets/1image.png"
+                    src={heroImage}
                     alt="Modern Architecture"
                     className="w-full h-full object-cover opacity-60"
                 />

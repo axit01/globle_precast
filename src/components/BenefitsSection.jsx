@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
+import benefitsImage from '../assets/2image.png';
+
 const BenefitsSection = () => {
     const { t } = useLanguage();
     const benefits = t('benefits.features') || [];
@@ -59,7 +61,7 @@ const BenefitsSection = () => {
                         className="relative h-full min-h-[500px] bg-slate-800 rounded-3xl overflow-hidden shadow-2xl"
                     >
                         <img
-                            src="/src/assets/2image.png"
+                            src={benefitsImage}
                             alt="Premium Architectural Detail"
                             className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
                         />

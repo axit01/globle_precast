@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
+import logo from '../assets/logo.png';
+
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
@@ -34,7 +36,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <NavLink to="/" className="flex-shrink-0 flex items-center">
                         <img
-                            src="/src/assets/logo.png"
+                            src={logo}
                             alt="Global Precast"
                             className="h-[72px] w-auto"
                         />
