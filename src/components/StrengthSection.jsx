@@ -2,25 +2,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Maximize2, Layers } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const StrengthSection = () => {
-    const features = [
-        {
-            icon: ShieldCheck,
-            title: "Reinforced Durability",
-            description: "High-strength M-40 grade concrete reinforced with 3mm high carbon tensile steel (PC wire) for exceptional longevity."
-        },
-        {
-            icon: Maximize2,
-            title: "Space Maximization",
-            description: "Replace bulky 6-9 inch brick walls with our efficient 75mm (3-inch) panels, gaining valuable floor space."
-        },
-        {
-            icon: Layers,
-            title: "Rapid Installation",
-            description: "Factory-made, re-usable folding systems that significantly reduce construction time and labor costs."
-        }
-    ];
+    const { t } = useLanguage();
+
+    // Get features from translation file, assuming it returns an array
+    const featuresData = t('strength.features');
+    // Map icons to the features. Note: This relies on the order in translations.js matching this array.
+    // A safer way would be to store keys in the features array or handle this differently, 
+    // but for now we'll assume the order is: Durability, Space, Installation.
+    const icons = [ShieldCheck, Maximize2, Layers];
+
+    const features = Array.isArray(featuresData) ? featuresData.map((feature, index) => ({
+        ...feature,
+        icon: icons[index]
+    })) : [];
 
     return (
         <section className="py-24 bg-white text-slate-900">
@@ -32,10 +29,10 @@ const StrengthSection = () => {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-sm font-semibold text-orange-600 tracking-wider uppercase mb-2">Build to Last</h2>
-                    <h3 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6">The Strength of Precast</h3>
+                    <h2 className="text-sm font-semibold text-orange-600 tracking-wider uppercase mb-2">{t('strength.uptime')}</h2>
+                    <h3 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6">{t('strength.title')}</h3>
                     <p className="text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
-                        Combining industrial robustness with modern aesthetics, our folding wall systems redefine structural integrity.
+                        {t('strength.desc')}
                     </p>
                 </motion.div>
 
@@ -54,7 +51,7 @@ const StrengthSection = () => {
                             </div>
                             <h4 className="text-2xl font-bold font-display text-slate-900 mb-4">{feature.title}</h4>
                             <p className="text-slate-600 leading-relaxed">
-                                {feature.description}
+                                {feature.desc}
                             </p>
                         </motion.div>
                     ))}

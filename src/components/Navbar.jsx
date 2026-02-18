@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const { language, setLanguage, t } = useLanguage();
 
     // Close mobile menu on route change
     useEffect(() => {
@@ -14,9 +16,15 @@ const Navbar = () => {
     }, [location]);
 
     const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Catalog', path: '/catalog' },
-        { name: 'Contact', path: '/contact' },
+        { name: t('nav.home'), path: '/' },
+        { name: t('nav.catalog'), path: '/catalog' },
+        { name: t('nav.contact'), path: '/contact' },
+    ];
+
+    const languages = [
+        { code: 'en', label: 'English' },
+        { code: 'mr', label: 'मराठी' },
+        { code: 'hi', label: 'हिंदी' }
     ];
 
     return (
@@ -24,18 +32,20 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
-                    <NavLink to="/" className="flex-shrink-0">
-                        <span className="font-display font-bold text-2xl tracking-tighter text-slate-900">
-                            GLOBAL PRECAST
-                        </span>
+                    <NavLink to="/" className="flex-shrink-0 flex items-center">
+                        <img
+                            src="/src/assets/logo.png"
+                            alt="Global Precast"
+                            className="h-[72px] w-auto"
+                        />
                     </NavLink>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-8">
+                    <div className="hidden md:flex items-center space-x-8">
+                        <div className="flex items-baseline space-x-8">
                             {navLinks.map((link) => (
                                 <NavLink
-                                    key={link.name}
+                                    key={link.path}
                                     to={link.path}
                                     className={({ isActive }) =>
                                         `px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive
@@ -48,10 +58,42 @@ const Navbar = () => {
                                 </NavLink>
                             ))}
                         </div>
+
+                        {/* Language Selector */}
+                        <div className="relative group">
+                            <button className="flex items-center space-x-1 text-slate-600 hover:text-orange-600 focus:outline-none">
+                                <Globe className="w-5 h-5" />
+                                <span className="uppercase text-sm font-medium">{language}</span>
+                            </button>
+                            <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
+                                {languages.map((lang) => (
+                                    <button
+                                        key={lang.code}
+                                        onClick={() => setLanguage(lang.code)}
+                                        className={`block w-full text-left px-4 py-2 text-sm ${language === lang.code ? 'bg-orange-50 text-orange-600' : 'text-slate-700 hover:bg-slate-50'}`}
+                                    >
+                                        {lang.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="-mr-2 flex md:hidden">
+                    <div className="-mr-2 flex md:hidden items-center space-x-4">
+                        {/* Mobile Language Selector */}
+                        <div className="relative">
+                            <select
+                                value={language}
+                                onChange={(e) => setLanguage(e.target.value)}
+                                className="appearance-none bg-transparent text-slate-600 font-medium py-1 pr-4 pl-1 focus:outline-none"
+                            >
+                                {languages.map((lang) => (
+                                    <option key={lang.code} value={lang.code}>{lang.code.toUpperCase()}</option>
+                                ))}
+                            </select>
+                        </div>
+
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             type="button"
@@ -79,7 +121,7 @@ const Navbar = () => {
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             {navLinks.map((link) => (
                                 <NavLink
-                                    key={link.name}
+                                    key={link.path}
                                     to={link.path}
                                     className={({ isActive }) =>
                                         `block px-3 py-2 rounded-md text-base font-medium ${isActive
